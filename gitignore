@@ -1,0 +1,31 @@
+# Python
+pycache/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+ENV/
+env/
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+
+# VS Code settings
+*.code-workspace
