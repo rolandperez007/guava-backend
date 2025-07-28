@@ -22,7 +22,9 @@ env/
 .idea/
 
 # Logs
-*.log
+*.loggit rm -r --cached .venv/
+git commit -m "Remove .venv from tracking"
+git push origin main
 
 # Database
 *.sqlite3
