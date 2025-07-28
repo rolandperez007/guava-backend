@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: guava-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: |
+      if [ -f "main.py" ]; then
+        # Try FastAPI/Uvicorn first
+        uvicorn main:app --host 0.0.0.0 --port 10000 || \
+        # Try Flask
+        gunicorn main:app --bind 0.0.0.0:10000 || \
+        # Try Flask with app.py
+        gunicorn app:app --bind 0.0.0.0:10000
+      elif [ -f "app.py" ]; then
+        # Try FastAPI/Uvicorn with app.py
+        uvicorn app:app --host 0.0.0.0 --port 10000 || \
+        # Try Flask with app.py
+        gunicorn app:app --bind 0.0.0.0:10000
+      else
+        echo "No main.py or app.py found. Please specify your entrypoint."
+        exit 1
+      fi
+    envVars:
+      - key: PORT
+        value: 10000
